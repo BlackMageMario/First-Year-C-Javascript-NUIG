@@ -1,0 +1,52 @@
+<html>
+<head>
+<style>
+tr { width: 300px; height: 100px; border: 10px }
+td { width: 100px; height: 100px; border: 10px }
+img { width: 100px; height: 100px }
+</style>
+<script type = "text/javascript">
+//function that handles the click effect.
+function imgCaught(event)
+{
+	if(event.button==0)
+	{
+		alert("Caught!");
+	}
+}
+//sets the interval and calls the function moveImgRandomly, which moves the image around the different cells.
+//I don't actually understand why appending the child to a new cell will automatically remove it from the other cells...
+//is Javascript actually that smart?
+setInterval(function moveImgRandomly()
+{
+	var oldImg = document.getElementById("img");
+	var i = Math.floor(Math.random() * 3);
+	var k = Math.floor(Math.random() * 3);
+	var table = document.getElementById("table");
+	var row = table.rows[i];
+	var cell = row.cells[k];
+	cell.appendChild(oldImg);
+}, 200);//note: I find that 200 ms is way, way, WAY too fast to accurately try and click on the img.
+//another note: I added ids to both table and img to make it easier to move the image.
+</script>
+</head>
+<body>
+<table id="table">
+<tr>
+<td></td>
+<td></td> 
+<td><img id="img"src="http://graemehobbs93.files.wordpress.com/2012/01/ape-1.jpg" onclick="imgCaught(event)";/></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</body>
+</html>

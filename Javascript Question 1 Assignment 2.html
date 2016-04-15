@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Question 1 Assignment 2</title>
+</head>
+<body>
+<script type="text/javascript">
+
+function apply(stack, op)
+{
+	var n = stack.length - 1;
+	var i;
+	var newArray = [];
+	switch(op)
+	{
+		case "+":
+			stack[n-1] = stack[n] + stack[n - 1];
+			newArray = stack.slice(0, -1);
+			break;
+		case "-":
+			stack[n-1] = stack[n] - stack[n - 1];
+			newArray = stack.slice(0, -1);
+			break;
+		case "*":
+			stack[n-1] = stack[n] * stack[n - 1];
+			newArray = stack.slice(0, -1);
+			break;
+		case "/":
+			stack[n-1] = stack[n] / stack[n - 1];
+			newArray = stack.slice(0, -1);
+			break;
+		case "neg":
+			stack[n] = -1 * stack[n];
+			newArray = stack;
+			break;
+		case "sqrt":
+			stack[n] = Math.sqrt(stack[n]);
+			newArray = stack;
+			break;
+		default:
+			document.write("<p>Welp</p>");
+			return;
+	}
+	for(i = 0; i < newArray.length; i++)
+	{
+		document.write("<p> " + newArray[i] + "</p>");
+	}
+	
+}
+
+function main()
+{
+	var passedArray = [9, 10, 3.7, 8.9];
+	document.write("<p><b>Question 1 Assignment 2</b></p>");
+	apply(passedArray, "+");
+}
+</script>
+<body onload="main()">
+</body>
+</html>

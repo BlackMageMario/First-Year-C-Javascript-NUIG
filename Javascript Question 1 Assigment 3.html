@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+Question 1 Assignment 3
+</title>
+</head>
+<body onload="driver()">
+<script type="text/javascript">
+function createTwoDimensionalArray(r)
+{//creates a two dimensional array of length r x r, e.g. if 2 is entered creates a 2x2 matrix
+	var special = [];
+	var i = 0;
+	for(i = 0; i < r;i++)
+	{
+		special[i] = [];
+	}
+	return special;
+}
+function add()
+{//adds multiple matrixs of same length n together. It achieves this using three loops;
+//one to loop through the arguments, one to loop through the array of arrays, and one to loop through the values of the second array;
+//it then adds these values, and stores them in a new matrix. It then prints this matrix.
+	var x = 0;
+	var y = 0;
+	var z = 0;
+	var theLength = arguments.length//need the number of arguments.
+	var matrixLength = arguments[0].length;//need the size of the matrices, e.g. whether they are 2 x 2 or 3 x 3 etc.
+	var result = createTwoDimensionalArray(matrixLength);
+	for(x = 0; x < matrixLength; x++)
+	{
+		for(y = 0; y < matrixLength; y++)
+		{
+			result[x][y] = 0;
+		}
+	}
+	for(z = 0; z < matrixLength; z++)
+	{
+		for(y = 0; y < matrixLength; y++)
+		{
+			for(x = 0; x < theLength; x++)
+			{
+				result[z][y] = parseInt(result[z][y]) + parseInt(arguments[x][y][z]);
+			}
+				
+		}	
+	}
+
+	for(x = 0; x < matrixLength; x++)
+	{
+		for(y = 0; y < matrixLength; y++)
+		{
+				document.write("<p>"+result[y][x]+"</p>");
+		}
+	}
+}
+function driver()
+{
+//just a function that creates all the variables and then calls add.
+	var a = createTwoDimensionalArray(2);//change 2 to 3 to create 3 x 3 matrices
+	a[0][0] = 9;
+	a[0][1] = 4;
+	//a[0][2] = 3;
+	a[1][0] = -5;
+	a[1][1] = 8;
+	//a[1][2] = 5;
+	//a[2][0] = 2;
+	//a[2][1] = 10;
+	//a[2][2] = 1;
+	var b = createTwoDimensionalArray(2);
+	b[0][0] = 1;
+	b[0][1] = 0;
+	//b[0][2] = 2;
+	b[1][0] = 23;
+	b[1][1] = 11;
+	//b[1][2] = 3;
+	//b[2][0] = 2;
+	//b[2][1] = 9;
+	//b[2][2] = 21;
+	var c = createTwoDimensionalArray(2);
+	c[0][0] = 5;
+	c[0][1] = 3;
+	c[1][0] = -8;
+	c[1][1] = -2;
+	var d = createTwoDimensionalArray(2);
+	d[0][0] = 3;
+	d[0][1] = -5;
+	d[1][0] = 2;
+	d[1][1] = 1;
+	add(a, b);
+}
+</script>
+</body>
+</html>

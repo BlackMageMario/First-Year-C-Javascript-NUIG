@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+function getName()//gets the username from the user.
+{
+	var userName = "";
+	userName = document.getElementById("nameInput").value;
+	if(userName == "")//checks if the username is blank or not. If blank, sends an error;
+	//if not, calls display()
+	{
+		alert("Error: no input detected. Please input something.");
+	}
+	else
+	{
+		userName = userName.toUpperCase();
+		display(userName);
+	}
+}
+function display(x)//displays the username entered 5 times.
+{
+	var i = 0;
+	for(i = 0; i < 5; i++)
+	{
+		var newWindow = window.open("", "Message", "width=350 , height=50");
+		newWindow.document.write(x+" ");
+	}
+	
+}
+</script>
+</head>
+<body>
+<h2>Question 2, Assignment 1.</h2>
+<form id="Question2Form">
+<p>Please enter your name.</p>
+<input type="text" id="nameInput"/>
+<p>Press the button to display what you have entered.</p>
+<input type="button" onclick="getName()" value="Submit"/>
+<p></p>
+</form>
+</body>
+</html>

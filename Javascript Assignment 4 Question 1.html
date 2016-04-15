@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Assignment 4 Question</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>
+//I couldn't see a way around using global variables that wouldn't make the code obtuse and bloated; I felt that it was the better option in this case.
+var theColor = 0;
+var theBackgroundColor = 0;
+var theFontFamily = 0;
+var theFontStyle = 0;
+var styleCopied = false;
+
+function createDivs()//creates the extra style divs.
+{
+	$("body").append("<div style='height:40px;'></div>");//I know I *shouldn't* be doing this to space out content, but I could not find a property to
+	//properly position the divs... so I cheated. Sorry :c
+	$("body").append("<div id='5' style='color: white; background-color: green; font-family: arial; font-style:oblique;' onclick='copyStyle(this.id)'>First Style Template</div>");
+	//all of these calls to jQuery just create div elements that can't be edited.
+	$("body").append("<div id='6' style='color: green; background-color: white; font-family: Times; font-style:normal;' onclick='copyStyle(this.id)'>Second Style Template</div>");
+	$("body").append("<div id='7' style='color: orange; background-color: blue; font-family: Impact; font-style:italic;' onclick='copyStyle(this.id)'>Third Style Template</div>");
+	$("body").append("<div  id='8' style='color: purple; background-color: black; font-family: Veranda; font-style:normal;' onclick='copyStyle(this.id)'>Fourth Style Template</div>");
+}
+function copyStyle(elementID)
+{//depending on the value of styleCopied, either copies the style from the element or pastes the style stored by the function.
+//the first if statement is there to ensure that the divs created by creatDivs() can't be modified
+var element = document.getElementById(elementID);
+	if(element.id > 4 && styleCopied == true)
+	{
+	//just sets styleCopied to false;
+		styleCopied = false;
+	}
+	if(styleCopied == true)
+	{
+	//sets the style of the element to the values stored
+	//then sets styleCopied to false;
+		element.style.color = theColor;
+		element.style.backgroundColor = theBackgroundColor;
+		element.style.fontFamily = theFontFamily;
+		element.style.fontStyle = theFontStyle;
+		styleCopied = false;
+	}
+	else
+	{
+	//copies the style of the element and stores them
+	//then sets styleCopied to true (so that the style stored can be copied to the next element)
+	theColor =  window.getComputedStyle(element).getPropertyValue("color");
+	theBackgroundColor = window.getComputedStyle(element).getPropertyValue("background-color");
+	theFontFamily = window.getComputedStyle(element).getPropertyValue("font-family");
+	theFontStyle = window.getComputedStyle(element).getPropertyValue("font-style");
+	styleCopied = true;
+	}	
+}
+</script>
+</head>
+<body onload="createDivs()">
+<div id="1" style="color: white; background-color: red; font-family: arial; font-style:oblique;" onclick="copyStyle(this.id)">Element Hard</div>
+<div id="2" style="color: black; background-color: yellow; font-family: Times; font-style: italic;" onclick="copyStyle(this.id)">Element Hard 2: Element Harder</div>
+<div id="3" style="color: brown; background-color: white; font-family: Veranda; font-style: normal;" onclick="copyStyle(this.id)">Element Hard With a Vengence</div>
+<div id="4" style="color: red; background-color: black; font-family: 'calibiri'; font-style:normal;" onclick="copyStyle(this.id)">Live Free or Element Hard/Element Hard 4.0</div>
+</body>
+</html>

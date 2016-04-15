@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Question 2 Assignment 2</title>
+</head>
+<body>
+<body onload="main()">
+<script type="text/javascript">
+var error = 0;
+var stack = [];
+var op = 0;
+function apply(stack, op)
+{
+	var n = stack.length - 1;
+	var i;
+	var newArray = [];
+	switch(op)
+	{
+		case "+":
+			stack[n-1] = stack[n] + stack[n - 1];
+			newArray = stack.slice(0, -1);
+			break;
+		case "-":
+			stack[n-1] = stack[n] - stack[n - 1];
+			newArray = stack.slice(0, -1);
+			break;
+		case "*":
+			stack[n-1] = stack[n] * stack[n - 1];
+			newArray = stack.slice(0, -1);
+			break;
+		case "/":
+			stack[n-1] = stack[n] / stack[n - 1];
+			newArray = stack.slice(0, -1);
+			break;
+		case "neg":
+			stack[n] = -1 * stack[n];
+			newArray = stack;
+			break;
+		case "sqrt":
+			stack[n] = Math.sqrt(stack[n]);
+			newArray = stack;
+			break;
+		default:
+			document.write("<p>Welp</p>");
+			return;
+	}
+	for(i = 0; i < newArray.length; i++)
+	{
+		document.write("<p> " + newArray[i] + "</p>");
+	}
+	
+}
+function inputConstructor(name, i)
+{
+	var nameOfInput = name;
+	name = document.createElement("INPUT");
+	name.setAttribute("type", "text");
+	document.write("<p>Enter "+nameOfInput+"</p>");
+	document.body.appendChild(name);
+	this.checkInput = function checkInput()
+	{
+		if(isNaN(name.value) == 1)
+		{
+			alert("Error: number entered incorrectly.");
+			error = 1;
+		}
+		else
+		{
+			stack[i] = parseInt(name.value);
+		}
+	}
+	this.checkOp = function checkOp()
+	{
+		i = String(name.value);
+		if(i == "+" || i == "-" || i == "/" || i == "*" || i == "neg" || i =="sqrt")
+			{
+				alert("Correct");
+				op = i;
+			}
+		else
+		{
+			error = 1;
+			alert("Incorrect operand.");
+		}
+	}	
+}
+
+function main()
+{
+	document.write("<p><b>Question 2 Assignment 2</b></p>");
+	var i = 0;
+	var number1 = new inputConstructor("number 1", 0);
+	var number2 = new inputConstructor("number 2", 1);
+	var number3 = new inputConstructor("number 3", 2);
+	var number4 = new inputConstructor("number 4", 3);
+	var operand = new inputConstructor("operand", 4);
+	var t = document.createTextNode("Check entered values");
+	var checkButton = document.createElement("BUTTON");
+	checkButton.appendChild(t);
+	document.write("<br>");
+	checkButton.onclick = function()
+	{
+		error = 0;
+		number1.checkInput();
+		number2.checkInput();
+		number3.checkInput();
+		number4.checkInput();
+		operand.checkOp();
+		if(error == 0)
+		{
+			/*for(i = 0; i < 4; i++)
+			{
+				document.write(stack[i]);
+			}
+			document.write(op);*/
+			apply(stack, op);
+		}
+		return false;
+	}
+	document.body.appendChild(checkButton);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+function Person(fullName, homeAddress, telephoneNumber)//creates an object Person who has a fullName
+// a home address and a telephone number.
+{
+	this.fullName = fullName;
+	this.homeAddress = homeAddress;
+	this.telephoneNumber = telephoneNumber;
+}
+function newObject()//creates a new object with a .show method that prints out hi.
+{
+	this.show = function()
+	{
+		document.write("<p>Hi!</p>");
+	}
+}
+function main()
+{
+	Person.prototype.show = function()//prototypes a method for printing out the information.
+	{
+		document.write("<p>Full Name: " + this.fullName+"</p>");
+		document.write("<p>Home Address: " + this.homeAddress+"</p>");
+		document.write("<p>Telephone Number " + this.telephoneNumber+"</p>");
+	}
+	Person.prototype = new newObject();//replaces the previous prototype method with on
+	//inherited from the newObject().
+	var aPerson1 = new Person("Tom Tomerton", "123 Away Lane", "087-2816556");
+	var aPerson2 = new Person("Bob Hannon", "Assingot Street", "083-5867231");
+	var aPerson3 = new Person("Fredia Langston", "Bodrick Avenue", "079-2145767");
+	document.write("<h2>Question 4, Assignment 1.</h2>");
+	aPerson1.show();//uses the prototype method to print out information.
+	aPerson2.show();
+	aPerson3.show();
+}
+</script>
+</head>
+<body onload="main();">
+</body>
+</html>
